@@ -26,6 +26,7 @@ module.exports = {
   ],
   rules: {
     'no-use-before-define': 'off',
+    'class-methods-use-this': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
     'react/jsx-filename-extension': ['warn', { extensions: ['.tsx'] }],
     'import/extensions': [
@@ -38,14 +39,11 @@ module.exports = {
     ],
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': ['error'],
-    
-
     'max-len': ['warn', { code: 80 }],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'import/prefer-default-export': 'off',
-    'react/prop-types': 'off'
-
+    'react/prop-types': 'off',
   },
   settings: {
     'import/resolver': {
