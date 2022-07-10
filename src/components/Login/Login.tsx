@@ -4,6 +4,8 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import authService from '../../services/auth.service';
+import { useAppDispatch } from '../../redux/hooks';
+import { loginFailure, loginRequest, loginSuccess } from '../../redux/slices/auth.slice';
 
 function Login() {
   type TInputState = {
@@ -21,6 +23,7 @@ function Login() {
   });
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const validationSchema = () =>
     Yup.object().shape({
@@ -36,9 +39,11 @@ function Login() {
       message: '',
       loading: true,
     });
+    dispatch(loginRequest);
 
     authService.login(login, password).then(
-      () => {
+      (data) => {
+        dispatch(loginSuccess(data));
         navigate('/');
       },
       error => {
@@ -54,6 +59,7 @@ function Login() {
           loading: false,
           message: resMessage,
         });
+        dispatch(loginFailure(error));
       }
     );
   };

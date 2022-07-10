@@ -7,9 +7,11 @@ class AuthService {
       .post(`${API_URL}/auth/login`, {
         login,
         password
+      }, {
+        withCredentials: false
       })
       .then(response => {
-        if (response.data.accessToken) {
+        if (response.data.tokens.accessToken) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }
         return response.data;
