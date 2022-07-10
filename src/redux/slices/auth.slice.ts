@@ -2,14 +2,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
-import { TUser } from './types';
+import { TUser, TUserError } from './types';
 
 // Define a type for the slice state
 interface AuthState {
   loggingIn: boolean;
   isLogged: boolean;
   user: TUser | null;
-  error: Error | null;
+  error: TUserError | null;
 }
 
 const storedUser = localStorage.getItem('user');
@@ -36,9 +36,9 @@ export const authSlice = createSlice({
       state.user = action.payload;
       state.error = null;
     },
-    loginFailure: (state, action: PayloadAction<Error>) => {
+    loginFailure: (state, action: PayloadAction<TUserError>) => {
       state.loggingIn = false;
-      state.isLogged = true;
+      state.isLogged = false;
       state.user = null;
       state.error = action.payload;
     },
