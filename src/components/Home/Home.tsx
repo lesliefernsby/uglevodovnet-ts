@@ -1,12 +1,9 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../redux/hooks';
 
 import logo from '../../logo.svg';
 
 function Home() {
-  const auth = useAppSelector(state => state.auth);
-  console.log(auth);
   return (
     <div className="App">
       <img src={logo} className="App-logo" alt="logo" />
@@ -15,9 +12,8 @@ function Home() {
       </p>
 
       <Link to="/login">Login page</Link>
-  
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

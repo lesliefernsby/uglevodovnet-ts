@@ -3,13 +3,8 @@ import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
-import authService from '../../services/auth.service';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import {
-  loginFailure,
-  loginRequest,
-  loginSuccess,
-} from '../../redux/slices/auth.slice';
+import { loginAction } from '../../redux/slices/auth.slice';
 
 function Login() {
   type TInput = {
@@ -29,17 +24,8 @@ function Login() {
 
   const handleLogin = (formValue: TInput) => {
     const { login, password } = formValue;
-
-    dispatch(loginRequest());
-    authService.login(login, password).then(
-      data => {
-        dispatch(loginSuccess(data));
-        navigate('/');
-      },
-      error => {
-        dispatch(loginFailure(error.response.data));
-      }
-    );
+    dispatch(loginAction(login, password));
+    navigate('/');
   };
 
   const initialValues = {
