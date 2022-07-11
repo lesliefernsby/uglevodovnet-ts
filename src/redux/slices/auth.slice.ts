@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, Dispatch } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import authService from '../../services/auth.service';
 import type { RootState } from '../store';
 import { TUser, TUserError } from './types';
 
@@ -14,17 +15,15 @@ interface AuthState {
 
 const storedUser = localStorage.getItem('user');
 const parsedUser = storedUser ? JSON.parse(storedUser) : null;
-// Define the initial state using that type
 const initialState: AuthState = parsedUser
   ? { loggingIn: false, isLogged: true, user: parsedUser, error: null }
   : { loggingIn: false, isLogged: false, user: null, error: null };
 
 export const authSlice = createSlice({
   name: 'auth',
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    loginRequest: (state) => {
+    loginRequest: state => {
       state.loggingIn = true;
       state.isLogged = false;
       state.user = null;
@@ -47,7 +46,18 @@ export const authSlice = createSlice({
 
 export const { loginRequest, loginSuccess, loginFailure } = authSlice.actions;
 
-// Other code such as selectors can use the imported `RootState` type
 export const selectAuth = (state: RootState) => state.auth;
 
-export default authSlice.reducer;
+export const loginAction =
+  (log: string, pass: string) =>
+  async (dispatch: Dispatch) => {
+    dispatch(loginRequest());
+    authService.login(log, pass).then(
+      data => {
+        dispatch(loginSuccess(data));
+      },
+      error => {
+        dispatch(loginFailure(error.response.data));
+      }
+    );
+  };
