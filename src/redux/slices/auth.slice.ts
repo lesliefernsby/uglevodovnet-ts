@@ -49,10 +49,21 @@ export const { loginRequest, loginSuccess, loginFailure } = authSlice.actions;
 export const selectAuth = (state: RootState) => state.auth;
 
 export const loginAction =
-  (log: string, pass: string) =>
-  async (dispatch: Dispatch) => {
+  (log: string, pass: string) => async (dispatch: Dispatch) => {
     dispatch(loginRequest());
     authService.login(log, pass).then(
+      data => {
+        dispatch(loginSuccess(data));
+      },
+      error => {
+        dispatch(loginFailure(error.response.data));
+      }
+    );
+  };
+
+export const refreshToken =
+  (access: string, refresh: string) => async (dispatch: Dispatch) => {
+    authService.refreshToken(access, refresh).then(
       data => {
         dispatch(loginSuccess(data));
       },
