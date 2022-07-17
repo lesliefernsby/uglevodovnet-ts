@@ -19,11 +19,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-    'react-hooks',
-  ],
+  plugins: ['react', '@typescript-eslint', 'react-hooks'],
   rules: {
     'no-use-before-define': 'off',
     'class-methods-use-this': 'off',
@@ -43,7 +39,17 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'import/prefer-default-export': 'off',
-    'react/prop-types': 'off',
+    'react/prop-types': 0,
+    'react/function-component-definition': [
+      2,
+      {
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function',
+      },
+    ],
+    'react/require-default-props': 'off',
+    'react/no-unused-prop-types': 'off',
+    'jsx-a11y/anchor-is-valid': 'off',
   },
   settings: {
     'import/resolver': {
