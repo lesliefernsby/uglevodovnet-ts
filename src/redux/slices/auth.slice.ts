@@ -41,10 +41,17 @@ export const authSlice = createSlice({
       state.user = null;
       state.error = action.payload;
     },
+    loggedOut: state => {
+      state.loggingIn = false;
+      state.isLogged = false;
+      state.user = null;
+      state.error = null;
+    },
   },
 });
 
-export const { loginRequest, loginSuccess, loginFailure } = authSlice.actions;
+export const { loginRequest, loginSuccess, loginFailure, loggedOut } =
+  authSlice.actions;
 
 export const selectAuth = (state: RootState) => state.auth;
 
@@ -60,6 +67,11 @@ export const loginAction =
       }
     );
   };
+
+export const logoutAction = () => async (dispatch: Dispatch) => {
+  authService.logout();
+  dispatch(loggedOut());
+};
 
 export const refreshToken =
   (access: string, refresh: string) => async (dispatch: Dispatch) => {

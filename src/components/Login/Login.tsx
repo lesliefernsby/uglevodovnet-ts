@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { loginAction } from '../../redux/slices/auth.slice';
 
-function Login() {
+const Login: React.FC = () => {
   type TInput = {
     login: string;
     password: string;
