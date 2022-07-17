@@ -1,13 +1,13 @@
 import React from 'react';
 import { Container, HeaderText, Wrapper } from '../SharedStyles';
 
-const Home: React.FC = () => (
+const System = () => (
   <Wrapper>
-    <HeaderText>Главная</HeaderText>
+    <HeaderText>Суть системы</HeaderText>
     <Container>
-      <div>Главная</div>
+      <div>System</div>
     </Container>
   </Wrapper>
 );
 
-export default Home;
+export default System;

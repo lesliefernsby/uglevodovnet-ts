@@ -57,3 +57,34 @@ export const Wrapper = styled(NavItemWrapper)`
     display: none;
   }
 `;
+
+export const ImageBack = styled(NavItemWrapper)`
+  background: url('${props => (props.background ? props.background : 'none')}')
+    no-repeat center;
+  margin: 0.5em;
+  height: 37em;
+  background-size: 100% 100%;
+  border-radius: 1.5em;
+  position: relative;
+  margin-bottom: -30em;
+  transition: background-image 1s ease-in-out;
+  
+}
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.55;
+    background: linear-gradient(
+      180deg,
+      rgba(54, 38, 75, 0.46) 33.7%,
+      rgba(249, 249, 249, 0) 100%
+    );
+    border-radius: 1.5em;
+  }
+`;
