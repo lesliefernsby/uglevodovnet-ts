@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { logoutAction } from '../../redux/slices/auth.slice';
+import { setPage } from '../../redux/slices/page.slice';
 import { Container, Logo, Text, Wrapper } from './Styles';
 
 const Header: React.FC = () => {
@@ -13,29 +14,33 @@ const Header: React.FC = () => {
     event.preventDefault();
     dispatch(logoutAction());
     navigate('/');
-  }
+  };
+
+  const handlePageChange = (newPage: string) => {
+    dispatch(setPage(newPage));
+  };
 
   return (
     <Container>
       <Wrapper margin="0 1em 0 3em" padding="1em">
-        <Link to="/">
+        <Link onClick={() => handlePageChange('home')} to="/">
           <Logo src="/img/logo.svg" />
         </Link>
       </Wrapper>
 
       <Wrapper flexDirection="row" alignItems="center" padding="1em">
         <Wrapper padding="1em" margin="0 1em 0 1em">
-          <Link to="/system">
+          <Link onClick={() => handlePageChange('system')} to="/system">
             <Text>Суть системы</Text>
           </Link>
         </Wrapper>
         <Wrapper padding="1em" margin="0 1em 0 1em">
-          <Link to="/faq">
+          <Link onClick={() => handlePageChange('faq')} to="/faq">
             <Text>ЧаВо</Text>
           </Link>
         </Wrapper>
         <Wrapper padding="1em" margin="0 1em 0 1em">
-          <Link to="/recipes">
+          <Link onClick={() => handlePageChange('recipes')} to="/recipes">
             <Text>Рецепты</Text>
           </Link>
         </Wrapper>
@@ -63,8 +68,8 @@ const Header: React.FC = () => {
             </Link>
           </Wrapper>
           <Wrapper padding="1em">
-            <Link to='#' onClick={handleLogout}>
-            <Text>Выйти</Text>
+            <Link to="#" onClick={handleLogout}>
+              <Text>Выйти</Text>
             </Link>
           </Wrapper>
         </Wrapper>

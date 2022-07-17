@@ -1,13 +1,11 @@
 import React from 'react';
 import { Container, HeaderText, Wrapper } from '../SharedStyles';
 
-const Home: React.FC = () => (
+export const Recipes = () => (
   <Wrapper>
-    <HeaderText>Главная</HeaderText>
+    <HeaderText>Рецепты</HeaderText>
     <Container>
-      <div>Главная</div>
+      <div>Рецепты</div>
     </Container>
   </Wrapper>
 );
-
-export default Home;
